@@ -4,6 +4,7 @@ import {withStyles} from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Typography from "@material-ui/core/Typography/Typography"
 import GroupList from "./GroupList"
+import CountForm from "./CountForm"
 
 const styles = theme => ({
   root: {
@@ -35,10 +36,25 @@ class ReportForm extends React.Component {
     this.setState({ group: id, phase: 1 })
   }
 
+  handleUnder = (value) => {
+    this.setState({ under: parseInt(value), phase: 2 })
+  }
+
+  handleOver = (value) => {
+    this.setState({ over: parseInt(value), phase: 3 })
+  }
+
+  handleOther = (value) => {
+    this.setState({ other: parseInt(value), phase: 0 })
+  }
+
   render(props) {
     const {classes} = this.props
     const phases = [
-      <GroupList handleSelect={this.handleGroupSelect}/>
+      <GroupList handleSelect={this.handleGroupSelect}/>,
+      <CountForm handleCount={this.handleUnder} title='Tösit alle 29 v.'/>,
+      <CountForm handleCount={this.handleOver} title='Tösit 29 v tai yli'/>,
+      <CountForm handleCount={this.handleOther} title='Muut'/>
     ]
     return (
       <Paper className={classes.root} elevation={1}>
