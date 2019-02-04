@@ -14,7 +14,8 @@ const styles = theme => ({
   },
   button: {
     width: '100%',
-    padding: 10
+    padding: 10,
+    fontSize: 20
   }
 });
 
@@ -42,7 +43,7 @@ class GroupList extends React.Component {
     const {classes} = this.props
     return (
       <div>
-        <Typography component="p" align="center">
+        <Typography variant="h6" component="h3" align="center">
           Valitse ryhmä:
         </Typography>
         {this.state.groups.map(group =>

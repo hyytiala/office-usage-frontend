@@ -65,7 +65,7 @@ class countForm extends React.Component {
     const {classes} = this.props
     return (
       <div>
-        <Typography component="p" align="center">
+        <Typography variant="h6" component="h3" align="center">
           {this.props.title}
         </Typography>
         <div className={classes.root}>

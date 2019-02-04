@@ -5,6 +5,8 @@ import Paper from '@material-ui/core/Paper'
 import Typography from "@material-ui/core/Typography/Typography"
 import GroupList from "./GroupList"
 import CountForm from "./CountForm"
+import Notification from "./Notification"
+import usageService from '../services/usages'
 
 const styles = theme => ({
   root: {
@@ -17,6 +19,9 @@ const styles = theme => ({
     maxWidth: 700,
     marginLeft: 'auto',
     marginRight: 'auto'
+  },
+  title: {
+    marginBottom: 20
   }
 });
 
@@ -45,7 +50,19 @@ class ReportForm extends React.Component {
   }
 
   handleOther = (value) => {
-    this.setState({ other: parseInt(value), phase: 0 })
+    this.setState({ phase: 0 })
+    this.addUsage(value)
+  }
+
+  addUsage = async (value) => {
+    const object = {
+      group: this.state.group,
+      under: this.state.under,
+      over: this.state.over,
+      other: value,
+    }
+    await usageService.create(object)
+
   }
 
   render(props) {
@@ -57,12 +74,15 @@ class ReportForm extends React.Component {
       <CountForm handleCount={this.handleOther} title='Muut'/>
     ]
     return (
-      <Paper className={classes.root} elevation={1}>
-        <Typography variant="h4" component="h1" align="center">
-          Kolokäynnit
-        </Typography>
-        {phases[this.state.phase]}
-      </Paper>
+      <div>
+        <Paper className={classes.root} elevation={1}>
+          <Typography className={classes.title} variant="h4" component="h1" align="center">
+            Kolokäynnit
+          </Typography>
+          {phases[this.state.phase]}
+        </Paper>
+        <Notification/>
+      </div>
     );
   }
 }
