@@ -35,7 +35,6 @@ class GroupList extends React.Component {
 
   select = (event) => {
     event.preventDefault()
-    console.log(event.currentTarget)
     this.props.handleSelect(event.currentTarget.id)
   }
 
