@@ -1,28 +1,41 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles'
+import ReportForm from "./components/ReportForm"
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+const styles = theme => ({
+  root: {
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
+    width: '100%',
+    marginTop: theme.spacing.unit * 3,
+    overflowX: 'auto',
+    maxWidth: 700,
+    marginLeft: 'auto',
+    marginRight: 'auto'
+  },
+  card: {
+    margin: 'auto',
+    marginTop: 25,
+    width: '50%'
+  },
+  button: {
+    width: '100%',
+    padding: 10
   }
+});
+
+function PaperSheet(props) {
+  return (
+    <div>
+      <ReportForm/>
+    </div>
+  );
 }
 
-export default App;
+PaperSheet.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(PaperSheet);
