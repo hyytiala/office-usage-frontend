@@ -4,6 +4,7 @@ import {withStyles} from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import Button from '@material-ui/core/Button'
 import Typography from "@material-ui/core/Typography/Typography"
+import groupsService from '../services/groups'
 
 const styles = theme => ({
   card: {
@@ -17,39 +18,41 @@ const styles = theme => ({
   }
 });
 
-const buttons = [
-  {
-  id: '123456789',
-  name: 'Krokotiilit'
-  },
-  {
-    id: '246886345',
-    name: 'Sudet'
+class GroupList extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      groups: []
+    }
   }
-]
 
-function GroupList(props) {
-  const {classes} = props
+  componentDidMount() {
+    groupsService.getAll().then(groups =>
+      this.setState({ groups })
+    )
+  }
 
-  function select(event) {
+  select = (event) => {
     event.preventDefault()
-    console.log(event.currentTarget.id)
-    props.handleSelect(event.currentTarget.id)
-
+    console.log(event.currentTarget)
+    this.props.handleSelect(event.currentTarget.id)
   }
 
-  return (
-    <div>
-      <Typography component="p" align="center">
-        Valitse ryhmä:
-      </Typography>
-      {buttons.map(group =>
-        <Card key={group.id} className={classes.card}>
-          <Button id={group.id} className={classes.button} onClick={select}>{group.name}</Button>
-        </Card>
-      )}
-    </div>
-  );
+  render(props) {
+    const {classes} = this.props
+    return (
+      <div>
+        <Typography component="p" align="center">
+          Valitse ryhmä:
+        </Typography>
+        {this.state.groups.map(group =>
+          <Card key={group.id} className={classes.card}>
+            <Button id={group.id} className={classes.button} onClick={this.select}>{group.name}</Button>
+          </Card>
+        )}
+      </div>
+    )
+  }
 }
 
 GroupList.propTypes = {
