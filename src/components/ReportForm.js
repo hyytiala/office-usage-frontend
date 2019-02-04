@@ -33,7 +33,8 @@ class ReportForm extends React.Component {
       group: '',
       under: 0,
       over: 0,
-      other: 0
+      other: 0,
+      notification: false
     }
   }
 
@@ -50,7 +51,11 @@ class ReportForm extends React.Component {
   }
 
   handleOther = (value) => {
-    this.setState({ phase: 0 })
+    this.setState({
+      group: '',
+      phase: 0,
+      notification: true
+    })
     this.addUsage(value)
   }
 
@@ -81,7 +86,7 @@ class ReportForm extends React.Component {
           </Typography>
           {phases[this.state.phase]}
         </Paper>
-        <Notification/>
+        {this.state.notification && <Notification/>}
       </div>
     );
   }
