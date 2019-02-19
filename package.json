@@ -10,6 +10,7 @@
     "react-dom": "^16.7.0",
     "react-material-ui-keyboard": "^6.2.1",
     "react-numpad-material": "^1.0.22",
+    "react-point": "^3.0.1",
     "react-scripts": "2.1.3"
   },
   "scripts": {

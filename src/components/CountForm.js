@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Typography from "@material-ui/core/Typography/Typography";
+import PointTarget from 'react-point'
 
 const styles = theme => ({
   card: {
@@ -36,6 +37,17 @@ const styles = theme => ({
   }
 });
 
+class Key extends React.Component {
+  render() {
+    const {id, className, onPress} = this.props
+    return (
+      <PointTarget onPoint={onPress}>
+        <Button className={className} onClick={onPress}>{id}</Button>
+      </PointTarget>
+    )
+  }
+}
+
 class countForm extends React.Component {
   constructor(props) {
     super(props);
@@ -44,8 +56,8 @@ class countForm extends React.Component {
     };
   }
 
-  handleInput = (event) => {
-    this.setState({ value: this.state.value === '0' ? event.currentTarget.id : this.state.value + event.currentTarget.id })
+  handleInput = (digit) => {
+    this.setState({ value: this.state.value === '0' ? digit : this.state.value + digit })
   }
 
   handleInputChange = (event) => {
@@ -80,46 +92,46 @@ class countForm extends React.Component {
         <Grid container spacing={8}>
           <Grid container item xs={12} spacing={24}>
             <Grid item xs={4}>
-              <Button id='1' className={classes.button} onClick={this.handleInput}>1</Button>
+              <Key id='1' className={classes.button} onPress={() => this.handleInput('1')}/>
             </Grid>
             <Grid item xs={4}>
-              <Button id='2' className={classes.button} onClick={this.handleInput}>2</Button>
+              <Key id='2' className={classes.button} onPress={() => this.handleInput('2')}/>
             </Grid>
             <Grid item xs={4}>
-              <Button id='3' className={classes.button} onClick={this.handleInput}>3</Button>
-            </Grid>
-          </Grid>
-          <Grid container item xs={12} spacing={24}>
-            <Grid item xs={4}>
-              <Button id='4' className={classes.button} onClick={this.handleInput}>4</Button>
-            </Grid>
-            <Grid item xs={4}>
-              <Button id='5' className={classes.button} onClick={this.handleInput}>5</Button>
-            </Grid>
-            <Grid item xs={4}>
-              <Button id='6' className={classes.button} onClick={this.handleInput}>6</Button>
+              <Key id='3' className={classes.button} onPress={() => this.handleInput('3')}/>
             </Grid>
           </Grid>
           <Grid container item xs={12} spacing={24}>
             <Grid item xs={4}>
-              <Button id='7' className={classes.button} onClick={this.handleInput}>7</Button>
+              <Key id='4' className={classes.button} onPress={() => this.handleInput('4')}/>
             </Grid>
             <Grid item xs={4}>
-              <Button id='8' className={classes.button} onClick={this.handleInput}>8</Button>
+              <Key id='5' className={classes.button} onPress={() => this.handleInput('5')}/>
             </Grid>
             <Grid item xs={4}>
-              <Button id='9' className={classes.button} onClick={this.handleInput}>9</Button>
+              <Key id='6' className={classes.button} onPress={() => this.handleInput('6')}/>
             </Grid>
           </Grid>
           <Grid container item xs={12} spacing={24}>
             <Grid item xs={4}>
-              <Button className={classes.button} onClick={this.resetInput}>Reset</Button>
+              <Key id='7' className={classes.button} onPress={() => this.handleInput('7')}/>
             </Grid>
             <Grid item xs={4}>
-              <Button id='0' className={classes.button} onClick={this.handleInput}>0</Button>
+              <Key id='8' className={classes.button} onPress={() => this.handleInput('8')}/>
             </Grid>
             <Grid item xs={4}>
-              <Button className={classes.button} onClick={this.handleSend}>OK</Button>
+              <Key id='9' className={classes.button} onPress={() => this.handleInput('9')}/>
+            </Grid>
+          </Grid>
+          <Grid container item xs={12} spacing={24}>
+            <Grid item xs={4}>
+              <Key id='Reset' className={classes.button} onPress={() => this.resetInput()}/>
+            </Grid>
+            <Grid item xs={4}>
+              <Key id='0' className={classes.button} onPress={() => this.handleInput('0')}/>
+            </Grid>
+            <Grid item xs={4}>
+              <Key id='OK' className={classes.button} onPress={() => this.handleSend()}/>
             </Grid>
           </Grid>
         </Grid>
