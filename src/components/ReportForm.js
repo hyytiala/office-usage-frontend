@@ -7,6 +7,8 @@ import GroupList from "./GroupList"
 import CountForm from "./CountForm"
 import Notification from "./Notification"
 import usageService from '../services/usages'
+import Fab from '@material-ui/core/Fab'
+import AutoRenewIcon from '@material-ui/icons/Autorenew'
 
 const styles = theme => ({
   root: {
@@ -14,15 +16,21 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
     width: '100%',
-    marginTop: theme.spacing.unit * 3,
+    marginTop: theme.spacing.unit * 2,
     overflowX: 'auto',
     maxWidth: 700,
     marginLeft: 'auto',
-    marginRight: 'auto'
+    marginRight: 'auto',
+    position: 'relative'
   },
   title: {
     marginBottom: 20
-  }
+  },
+  fab: {
+    position: 'absolute',
+    top: 20,
+    left: 20,
+  },
 });
 
 class ReportForm extends React.Component {
@@ -31,6 +39,7 @@ class ReportForm extends React.Component {
     this.state = {
       phase: 0,
       group: '',
+      groupName: '',
       under: 0,
       over: 0,
       other: 0,
@@ -38,8 +47,8 @@ class ReportForm extends React.Component {
     }
   }
 
-  handleGroupSelect = (id) => {
-    this.setState({ group: id, phase: 1 })
+  handleGroupSelect = (group) => {
+    this.setState({ group: group.id, groupName: group.name, phase: 1 })
   }
 
   handleUnder = (value) => {
@@ -53,10 +62,19 @@ class ReportForm extends React.Component {
   handleOther = (value) => {
     this.setState({
       group: '',
+      groupName: '',
       phase: 0,
       notification: true
     })
     this.addUsage(value)
+  }
+
+  handleReset = () => {
+    this.setState({
+      group: '',
+      groupName: '',
+      phase: 0
+    })
   }
 
   addUsage = async (value) => {
@@ -84,7 +102,13 @@ class ReportForm extends React.Component {
           <Typography className={classes.title} variant="h4" component="h1" align="center">
             Kolokäynnit
           </Typography>
+          <Typography variant="h6" component="h3" align="center">
+            {this.state.groupName}
+          </Typography>
           {phases[this.state.phase]}
+          <Fab className={classes.fab} onClick={() => this.handleReset()}>
+            <AutoRenewIcon/>
+          </Fab>
         </Paper>
         {this.state.notification && <Notification/>}
       </div>

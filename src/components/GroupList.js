@@ -34,8 +34,8 @@ class GroupList extends React.Component {
     )
   }
 
-  select = (id) => {
-    this.props.handleSelect(id)
+  select = (group) => {
+    this.props.handleSelect(group)
   }
 
   render(props) {
@@ -47,7 +47,7 @@ class GroupList extends React.Component {
         </Typography>
         {this.state.groups.map(group =>
           <Card key={group.id} className={classes.card}>
-            <PointTarget onPoint={() => this.select(group.id)}>
+            <PointTarget onPoint={() => this.select(group)}>
             <Button className={classes.button} onClick={() => this.select(group.id)}>{group.name}</Button>
             </PointTarget>
           </Card>

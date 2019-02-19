@@ -15,7 +15,6 @@ const styles = theme => ({
   root: {
     margin: 'auto',
     flexGrow: 1,
-    marginTop: 25,
     [theme.breakpoints.up('xs')]: {
       maxWidth: '50%'
     },
@@ -91,9 +90,6 @@ class countForm extends React.Component {
     const {classes} = this.props
     return (
       <div>
-        <Typography variant="h6" component="h3" align="center">
-          {this.props.title}
-        </Typography>
         <div className={classes.root}>
           <TextField
             id="standard-number"
@@ -110,6 +106,9 @@ class countForm extends React.Component {
             variant="outlined"
             disabled
           />
+          <Typography variant="h6" component="h3" align="center">
+            {this.props.title}
+          </Typography>
           <Grid container spacing={8}>
             <Grid container item xs={12} spacing={8}>
               <Grid item xs={4}>
