@@ -29,7 +29,8 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit + 10,
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    fontSize: 30
+    fontSize: 30,
+    touchAction: 'none'
   },
   textField: {
     marginTop: 20,
