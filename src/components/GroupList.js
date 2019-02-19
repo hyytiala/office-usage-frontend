@@ -5,6 +5,7 @@ import Card from '@material-ui/core/Card'
 import Button from '@material-ui/core/Button'
 import Typography from "@material-ui/core/Typography/Typography"
 import groupsService from '../services/groups'
+import PointTarget from 'react-point'
 
 const styles = theme => ({
   card: {
@@ -33,9 +34,8 @@ class GroupList extends React.Component {
     )
   }
 
-  select = (event) => {
-    event.preventDefault()
-    this.props.handleSelect(event.currentTarget.id)
+  select = (id) => {
+    this.props.handleSelect(id)
   }
 
   render(props) {
@@ -47,7 +47,9 @@ class GroupList extends React.Component {
         </Typography>
         {this.state.groups.map(group =>
           <Card key={group.id} className={classes.card}>
-            <Button id={group.id} className={classes.button} onClick={this.select}>{group.name}</Button>
+            <PointTarget onPoint={() => this.select(group.id)}>
+            <Button className={classes.button} onClick={() => this.select(group.id)}>{group.name}</Button>
+            </PointTarget>
           </Card>
         )}
       </div>

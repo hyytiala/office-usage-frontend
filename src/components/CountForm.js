@@ -24,7 +24,10 @@ const styles = theme => ({
     },
   },
   button: {
+    width: '100%',
     padding: theme.spacing.unit,
+    paddingTop: theme.spacing.unit + 10,
+    paddingBottom: theme.spacing.unit + 10,
     textAlign: 'center',
     color: theme.palette.text.secondary,
     fontSize: 30
@@ -34,6 +37,11 @@ const styles = theme => ({
     marginBottom: 20,
     width: '60%',
     margin: '0 20%'
+  },
+  input: {
+    color: 'black',
+    textAlign: 'center',
+    fontSize: '1.2em'
   }
 });
 
@@ -70,7 +78,7 @@ class countForm extends React.Component {
   }
 
   resetInput = (event) => {
-    this.setState({ value: '' })
+    this.setState({ value: '0' })
   }
 
   render(props) {
@@ -85,12 +93,19 @@ class countForm extends React.Component {
           id="standard-number"
           type="text"
           className={classes.textField}
+          InputProps={{
+            classes: {
+              input: classes.input,
+            },
+          }}
           value={this.state.value}
           onChange={this.handleInputChange}
           margin="normal"
+          variant="outlined"
+          disabled
         />
         <Grid container spacing={8}>
-          <Grid container item xs={12} spacing={24}>
+          <Grid container item xs={12} spacing={8}>
             <Grid item xs={4}>
               <Key id='1' className={classes.button} onPress={() => this.handleInput('1')}/>
             </Grid>
@@ -101,7 +116,7 @@ class countForm extends React.Component {
               <Key id='3' className={classes.button} onPress={() => this.handleInput('3')}/>
             </Grid>
           </Grid>
-          <Grid container item xs={12} spacing={24}>
+          <Grid container item xs={12} spacing={8}>
             <Grid item xs={4}>
               <Key id='4' className={classes.button} onPress={() => this.handleInput('4')}/>
             </Grid>
@@ -112,7 +127,7 @@ class countForm extends React.Component {
               <Key id='6' className={classes.button} onPress={() => this.handleInput('6')}/>
             </Grid>
           </Grid>
-          <Grid container item xs={12} spacing={24}>
+          <Grid container item xs={12} spacing={8}>
             <Grid item xs={4}>
               <Key id='7' className={classes.button} onPress={() => this.handleInput('7')}/>
             </Grid>
@@ -123,7 +138,7 @@ class countForm extends React.Component {
               <Key id='9' className={classes.button} onPress={() => this.handleInput('9')}/>
             </Grid>
           </Grid>
-          <Grid container item xs={12} spacing={24}>
+          <Grid container item xs={12} spacing={8}>
             <Grid item xs={4}>
               <Key id='Reset' className={classes.button} onPress={() => this.resetInput()}/>
             </Grid>
